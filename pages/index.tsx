@@ -38,17 +38,44 @@ const Home: NextPage<Props> = ({ posts }) => {
           alt=""
         />
       </div>
-      <div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md-gap-6 p-2 md:p-6">
         {posts.map((post) => (
           <Link key={post._id} href={`/post/${post.slug.current}`}>
-            <div>
-              <img src={urlFor(post.mainImage).url()} alt="" />
+            <div className="border rounded-lg group cursor-pointer hover:scale-105">
+              <img
+                className="h-60 w-full object-cover  transition-transform duration-200 ease-in-out"
+                src={urlFor(post.mainImage).url()}
+                alt=""
+              />
+              <div className="flex justify-between p-5 bg-white ">
+                <div>
+                  <p className="text-lg font-bold">{post.title}</p>
+                  <p className="text-xs">
+                    {post.description} by {post.author.name}
+                  </p>
+                  <img
+                    className="h-12 w-12 rounded-full"
+                    src={urlFor(post.author.image).url()}
+                    alt=""
+                  />
+                </div>
+              </div>
             </div>
           </Link>
         ))}
       </div>
     </div>
   );
+};
+
+const Grid: any = "";
+
+const a = () => {
+  <Grid container spacing={2}>
+    {[" ", " ", " ", " "].map((lala) => (
+      <Grid item key={lala} xs={12} md={6} lg={4}></Grid>
+    ))}
+  </Grid>;
 };
 
 export default Home;

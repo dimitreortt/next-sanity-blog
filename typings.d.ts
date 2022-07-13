@@ -1,7 +1,7 @@
 export type Post = {
   _id: string;
   _createdAt: string;
-  _title: string;
+  title: string;
   author: {
     name: string;
     image: string;
