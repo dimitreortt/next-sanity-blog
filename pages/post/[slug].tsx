@@ -18,7 +18,7 @@ type Props = {
 };
 
 export const Post: NextPage<Props> = ({ post }) => {
-  console.log(post);
+  // console.log(post);
   const [submitted, setSubmitted] = useState(false);
 
   const {
@@ -84,6 +84,12 @@ export const Post: NextPage<Props> = ({ post }) => {
               h2: (props: any) => (
                 <h1 className="text-xl font-bold my-5" {...props}></h1>
               ),
+              h3: (props: any) => (
+                <h1 className="text-lg font-bold my-5" {...props}></h1>
+              ),
+              h4: (props: any) => (
+                <h1 className="text-base font-bold my-5" {...props}></h1>
+              ),
               li: ({ children }: any) => (
                 <li className="ml-4 list-disc">{children}</li>
               ),
@@ -92,17 +98,42 @@ export const Post: NextPage<Props> = ({ post }) => {
                   {children}
                 </a>
               ),
+              p: ({ children }: any) => {
+                return <p className="pt-10">{children}</p>;
+              },
+              normal: ({ children }: any) => {
+                return <p className="pt-4">{children}</p>;
+              },
+              blockquote: ({ children }: any) => {
+                console.log("sou um blockquote");
+                return <p className="pt-10">{children}</p>;
+              },
             }}
           />
         </div>
       </article>
+
+      {/* Comments */}
+      <div className="flex flex-col p-10 my-10 max-w-2xl mx-auto shadow-yellow-500 shadow space-y-2">
+        <h3 className="text-4xl">Comments</h3>
+        <hr className="pb-2" />
+
+        {post.comments.map((comment) => (
+          <div key={comment._id}>
+            <p>
+              <span className="text-yellow-500">{comment.name}: </span>
+              {comment.comment}
+            </p>
+          </div>
+        ))}
+      </div>
 
       {submitted ? (
         <div className="flex flex-col p-10 my-10 bg-yellow-500 text-white max-w-2xl mx-auto">
           <h3 className="text-3xl font-bold">
             Thank you for submitting your comment!
           </h3>
-          <p>Once it has been approved, it will appear below!</p>
+          {/* <p>Once it has been approved, it will appear below!</p> */}
         </div>
       ) : (
         <form
@@ -166,21 +197,6 @@ export const Post: NextPage<Props> = ({ post }) => {
           />
         </form>
       )}
-
-      {/* Comments */}
-      <div className="flex flex-col p-10 my-10 max-w-2xl mx-auto shadow-yellow-500 shadow space-y-2">
-        <h3 className="text-4xl">Comments</h3>
-        <hr className="pb-2" />
-
-        {post.comments.map((comment) => (
-          <div key={comment._id}>
-            <p>
-              <span className="text-yellow-500">{comment.name}: </span>
-              {comment.comment}
-            </p>
-          </div>
-        ))}
-      </div>
     </main>
   );
 };
@@ -221,8 +237,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         },
         'comments': *[
           _type == 'comment' &&
-          post._ref == ^._id &&
-          approved == true
+          post._ref == ^._id 
         ],
         description,
         mainImage,

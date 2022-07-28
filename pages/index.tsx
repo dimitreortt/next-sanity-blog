@@ -51,7 +51,8 @@ const Home: NextPage<Props> = ({ posts }) => {
                 <div>
                   <p className="text-lg font-bold">{post.title}</p>
                   <p className="text-xs">
-                    {post.description} by {post.author.name}
+                    {post.description} by{" "}
+                    <span className="font-bold">{post.author.name}</span>
                   </p>
                   <img
                     className="h-12 w-12 rounded-full"
