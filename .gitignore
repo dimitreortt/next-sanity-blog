@@ -37,6 +37,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 
-sanityfolder
+sanityfolder/node_modules
 
 a.*
